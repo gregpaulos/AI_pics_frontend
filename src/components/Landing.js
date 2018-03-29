@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MediaQuery from "react-responsive";
 
 export default function Landing({ start }) {
   var buttonStyles = {
@@ -25,22 +26,44 @@ export default function Landing({ start }) {
   };
 
   return (
-    <div style={imageStyles}>
-      <div>
-        <div style={divStyle}>
-          <h1 className="display-3">Let's Test Our Robot Overlords!</h1>
-          <p className="lead">
-            {" "}
-            They may rule the world soon, but let's see how good they are at
-            recognizing what's in a picture right now.
-          </p>
+    <div>
+      <MediaQuery query="(min-device-width: 1224px)">
+        <div style={imageStyles}>
+          <div>
+            <div style={divStyle}>
+              <h1>Let's Test Our Robot Overlords!</h1>
+              <p>
+                They may rule the world soon, but let's see how good they are at
+                recognizing what's in a picture right now.
+              </p>
+            </div>
+            <Link to="/home">
+              <button style={buttonStyles}>Get Started ></button>
+            </Link>
+          </div>
         </div>
-        <Link to="/home">
-          <button style={buttonStyles} onClick={start}>
-            Get Started >
-          </button>
-        </Link>
-      </div>
+      </MediaQuery>
+      <MediaQuery query="(max-device-width: 1224px)">
+        <div
+          style={{
+            ...imageStyles,
+            padding: "30px",
+            paddingTop: "100px",
+            paddingBottom: "500px"
+          }}
+        >
+          <div style={divStyle}>
+            <h1>Let's Test Our Robot Overlords!</h1>
+            <p>
+              They may rule the world soon, but let's see how good they are at
+              recognizing what's in a picture right now.
+            </p>
+            <Link to="/home">
+              <button style={buttonStyles}>Get Started ></button>
+            </Link>
+          </div>
+        </div>
+      </MediaQuery>
     </div>
   );
 }
