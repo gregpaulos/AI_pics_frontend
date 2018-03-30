@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import circle from "../../circles.svg";
-import googlepic from "../../google.jpg";
 
 const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
   const styles = {
