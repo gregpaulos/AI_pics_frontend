@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const All = ({ all, getAll }) => {
   const styles = {
+    noBorder: { padding: "0px", margin: "0px" },
     circle: {
       height: "300px",
       padding: "20px"
@@ -43,7 +44,7 @@ const All = ({ all, getAll }) => {
     getAll();
     greeting = (
       <div>
-        <h2>Loading photos...</h2>
+        <h2 style={styles.noBorder}>Loading photos...</h2>
         <img src={circle} style={styles.circle} alt="" />
       </div>
     );
@@ -54,7 +55,7 @@ const All = ({ all, getAll }) => {
       <div>{greeting}</div>
       <div style={styles.flexin}>
         {all.map((photo, i) => (
-          <Link to={`/home/others/individual/${i+1}`}>
+          <Link to={`/home/others/individual/${i + 1}`}>
             <div key={photo.url} style={styles.card} className="Hover-cards">
               <img style={styles.photo} src={photo.url} alt="" />
             </div>
