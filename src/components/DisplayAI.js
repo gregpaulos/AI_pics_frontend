@@ -20,7 +20,7 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
       margin: "10px",
       marginTop: "40px",
       zIndex: "1",
-      animation: "dropin 3s",
+      animation: "dropin 3s"
     }
   };
 
@@ -41,8 +41,10 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
       </div>
     );
 
-  const clarifailist = clarifai.map(el => {
-    return <li key={el}>{el}</li>;
+  const clarifailist = clarifai.map((el, i) => {
+    if (i < 10) {
+      return <li key={el}>{el}</li>;
+    }
   });
 
   const clarifaidisplay =
