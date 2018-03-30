@@ -1,17 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import circle from "../circles.svg";
-import googlepic from "../google.jpg";
-import AIcard from "./AIcard";
+import circle from "../../circles.svg";
+import googlepic from "../../google.jpg";
 
 const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
   const styles = {
     photo: {
-      height: "300px",
+      width: "300px",
       padding: "20px"
     },
     flexin: {
-      display: "flex"
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center"
     },
     card: {
       boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
@@ -79,10 +80,10 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
 
   return (
     <div>
+      <div>
+        <img src={photo_url} style={styles.photo} alt="" />
+      </div>
       <div style={styles.flexin}>
-        <div>
-          <img src={photo_url} style={styles.photo} alt="" />
-        </div>
         <div style={styles.card}>
           <h4>Google</h4>
           <div>{googledisplay}</div>

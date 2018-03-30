@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAI } from "../actions";
-import circle from "../circles.svg"
+import { getAI } from "../../actions";
+import circle from "../../circles.svg"
 import { Link } from "react-router-dom";
 
 const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
@@ -15,8 +15,8 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
 
   const styles ={
     photo: {
-      height:"500px",
-      padding:"20px"
+      width:"400px",
+      padding: "10px"
     },
       button: {
         borderRadius: "8px",

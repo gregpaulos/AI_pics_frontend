@@ -1,10 +1,11 @@
-import { GET_PHOTO, GET_AI } from "../actions/index";
+import { GET_PHOTO, GET_AI, GET_ALL } from "../actions/index";
 
 const initialState = {
   randomPhoto: [],
   watson: [],
   google: [],
-  clarifai: []
+  clarifai: [],
+  all: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -13,6 +14,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, randomPhoto: [action.payload] };
     case GET_AI:
       return { ...state, [action.api]: action.payload };
+    case GET_ALL:
+      return { ...state, all: action.payload };
     default:
       return state;
   }

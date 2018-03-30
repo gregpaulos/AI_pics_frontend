@@ -3,12 +3,16 @@ import AppBar from "material-ui/AppBar";
 import Options from "./components/Options";
 import Intro from "./components/Intro";
 import Random from "./components/Random/Random";
+import Others from "./components/Others/Others";
 import "./App.css";
 import MediaQuery from "react-responsive";
 import { Route, Link } from "react-router-dom";
 import logo from "./eye.png";
 
 class App extends Component {
+
+
+
   styles = {
     layout: { display: "flex" },
     appBarLarge: { backgroundColor: "white" },
@@ -21,18 +25,21 @@ class App extends Component {
     },
     mainBackground: {
       backgroundColor: "rgb(230, 230, 230)",
-      height: "100vh",
+      minHeight: "100vh",
+      height: "auto",
       width: "85vw",
       display: "flex",
       justifyContent: "center",
-      alignItems: "center"
     },
     innerMain: {
       backgroundColor: "white",
       width: "75vw",
-      height: "85vh",
+      // minHeight: "85vh",
+      height: "auto",
       boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-      color: "rgb(100, 100, 100)"
+      color: "rgb(100, 100, 100)",
+      margin: "20px",
+      
     },
     sidebar: {
       width: "200px",
@@ -78,6 +85,7 @@ class App extends Component {
               <div style={this.styles.innerMain}>
                 <Route exact path="/home" component={Intro} />
                 <Route path="/home/random" component={Random} />
+                <Route path="/home/others" component={Others} />
               </div>
 
               </div>

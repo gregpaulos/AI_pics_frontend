@@ -1,8 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import RandomIntro from "./RandomIntro";
-import GetAI from "../GetAI";
-import DisplayAI from "../DisplayAI";
+import GetAI from "./GetAI";
+import DisplayAI from "./DisplayAI";
 
 const Random = () => {
   return (

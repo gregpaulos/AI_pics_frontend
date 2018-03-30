@@ -10,9 +10,9 @@ export default function Options({ start }) {
     paddingTop: "20px"
   };
   const linkStyles = {
-    textDecoration:"none",
-    color:"white"
-  }
+    textDecoration: "none",
+    color: "white"
+  };
 
   return (
     <div>
@@ -26,10 +26,12 @@ export default function Options({ start }) {
         <h1>&uarr;</h1>
         <p>Upload Your Own Photo</p>
       </div>
-      <div style={styles} className="Hover-darken">
-        <h1>&harr;</h1>
-        <p>See What Other People Have Done</p>
-      </div>
+      <Link style={linkStyles} to="/home/others/all">
+        <div style={styles} className="Hover-darken">
+          <h1>&harr;</h1>
+          <p>See What Other People Have Done</p>
+        </div>
+      </Link>
     </div>
   );
 }
