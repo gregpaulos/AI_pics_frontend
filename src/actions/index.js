@@ -3,7 +3,7 @@ var startURL = "https://glacial-chamber-31453.herokuapp.com";
 export const GET_ALL = 'GET_ALL'
 export function getAll() {
   return async (dispatch) => {
-    const response = await fetch('http://localhost:5000/v1/photos/')
+    const response = await fetch(startURL+'/v1/photos/')
     const json = await response.json()
     const results = json.results
     dispatch({
