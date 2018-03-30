@@ -56,8 +56,14 @@ class App extends Component {
     phoneMain: {
       backgroundColor: "rgb(34, 34, 34)",
       color: "white",
-      height: "100vh"
+      minHeight: "100vh",
+      height: "auto"
+    },
+    links : {
+      textDecoration: "none",
+      color: "white"
     }
+    
   };
 
   render() {
@@ -93,13 +99,15 @@ class App extends Component {
           </div>
         </MediaQuery>
         <MediaQuery query="(max-device-width: 1224px)">
-          <AppBar
+        <Link style={this.styles.links} to="/home"><AppBar
             style={this.styles.appBarSmall}
             title={<span style={this.styles.titleSmall}>Robot Tester</span>}
             showMenuIconButton={false}
-          />
+          /></Link>
           <div style={this.styles.phoneMain}>
-            <Options />
+                <Route exact path="/home" component={Options} />
+                <Route path="/home/random" component={Random} />
+                <Route path="/home/others" component={Others} />
           </div>
         </MediaQuery>
       </div>

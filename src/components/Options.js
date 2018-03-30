@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import MediaQuery from "react-responsive";
 
 export default function Options({ start }) {
   const styles = {
@@ -16,22 +17,47 @@ export default function Options({ start }) {
 
   return (
     <div>
-      <Link style={linkStyles} to="/home/random/step1">
-        <div style={styles} className="Hover-darken">
-          <h1>?</h1>
-          <p>Try a Random Photo</p>
+      <MediaQuery query="(min-device-width: 1224px)">
+        <div>
+          <Link style={linkStyles} to="/home/random/step1">
+            <div style={styles} className="Hover-darken">
+              <h1>?</h1>
+              <p>Try a Random Photo</p>
+            </div>
+          </Link>
+          <div style={styles} className="Hover-darken">
+            <h1>&uarr;</h1>
+            <p>Upload Your Own Photo</p>
+          </div>
+          <Link style={linkStyles} to="/home/others/all">
+            <div style={styles} className="Hover-darken">
+              <h1>&harr;</h1>
+              <p>See What Other People Have Done</p>
+            </div>
+          </Link>
         </div>
-      </Link>
-      <div style={styles} className="Hover-darken">
-        <h1>&uarr;</h1>
-        <p>Upload Your Own Photo</p>
-      </div>
-      <Link style={linkStyles} to="/home/others/all">
-        <div style={styles} className="Hover-darken">
-          <h1>&harr;</h1>
-          <p>See What Other People Have Done</p>
+      </MediaQuery>
+
+      <MediaQuery query="(max-device-width: 1224px)">
+        <div>
+          <Link style={linkStyles} to="/home/random/step1">
+            <div style={styles}>
+              <h1>?</h1>
+              <p>Try a Random Photo</p>
+            </div>
+          </Link>
+          <div style={styles}>
+            <h1>&uarr;</h1>
+            <p>Upload Your Own Photo</p>
+          </div>
+          <Link style={linkStyles} to="/home/others/all">
+            <div style={styles}>
+              <h1>&harr;</h1>
+              <p>See What Other People Have Done</p>
+            </div>
+          </Link>
         </div>
-      </Link>
+      </MediaQuery>
     </div>
   );
 }
