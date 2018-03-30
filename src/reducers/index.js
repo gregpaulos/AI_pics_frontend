@@ -10,7 +10,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PHOTO:
-      return { ...state, randomPhoto: [...state.randomPhoto, action.payload] };
+      return { ...state, randomPhoto: [action.payload] };
     case GET_AI:
       return { ...state, [action.api]: action.payload };
     default:

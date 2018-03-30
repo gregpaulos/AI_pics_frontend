@@ -12,26 +12,29 @@ h1 {
   height: 125px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 190px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-.Wanna-hover:hover { 
+.Hover-darken:hover { 
   background-color:black;
 } 
+
+.buttons:hover {
+  transform: scale(1.1);
+}
+
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes dropin {
+  0% {
+      transform: scale(0.99);
+      transform: translateY(-100px);
+      opacity: 0;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
 }

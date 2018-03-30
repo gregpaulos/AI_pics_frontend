@@ -6,3 +6,6 @@ body {
   text-align: center;
 }
 
+.Button-hover:hover {
+  transform: scale(1.1);
+}

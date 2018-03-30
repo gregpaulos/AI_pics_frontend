@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import AppBar from "material-ui/AppBar";
 import Options from "./components/Options";
-import Arti from "./components/Arti";
-import GetPhoto from "./components/GetPhoto";
+import Intro from "./components/Intro";
+import Random from "./components/Random/Random";
 import "./App.css";
 import MediaQuery from "react-responsive";
+import { Route, Link } from "react-router-dom";
+import logo from "./eye.png";
 
 class App extends Component {
-  logo = "./eye.png";
-  qmark = "./qmark.png";
-
   styles = {
     layout: { display: "flex" },
     appBarLarge: { backgroundColor: "white" },
@@ -23,7 +22,17 @@ class App extends Component {
     mainBackground: {
       backgroundColor: "rgb(230, 230, 230)",
       height: "100vh",
-      width: "85vw"
+      width: "85vw",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    },
+    innerMain: {
+      backgroundColor: "white",
+      width: "75vw",
+      height: "85vh",
+      boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+      color: "rgb(100, 100, 100)"
     },
     sidebar: {
       width: "200px",
@@ -51,10 +60,12 @@ class App extends Component {
           <div style={this.styles.layout}>
             <div style={this.styles.sidebar}>
               <div style={this.styles.upperLeft} />
-              <div style={this.styles.icon}>
-                <img src={this.logo} alt="" className="App-logo" />
-                <Options />
-              </div>
+              <Link to="/">
+                <div style={this.styles.icon}>
+                  <img src={logo} alt="" className="App-logo" />
+                </div>
+              </Link>
+              <Options />
             </div>
             <div>
               <AppBar
@@ -63,8 +74,12 @@ class App extends Component {
                 showMenuIconButton={false}
               />
               <div style={this.styles.mainBackground}>
-                <GetPhoto />
-                <Arti />
+
+              <div style={this.styles.innerMain}>
+                <Route exact path="/home" component={Intro} />
+                <Route path="/home/random" component={Random} />
+              </div>
+
               </div>
             </div>
           </div>
@@ -76,8 +91,7 @@ class App extends Component {
             showMenuIconButton={false}
           />
           <div style={this.styles.phoneMain}>
-
-          <Options />
+            <Options />
           </div>
         </MediaQuery>
       </div>

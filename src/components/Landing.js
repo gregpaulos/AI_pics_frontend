@@ -59,7 +59,7 @@ export default function Landing({ start }) {
               recognizing what's in a picture right now.
             </p>
             <Link to="/home">
-              <button style={buttonStyles}>Get Started ></button>
+              <button style={buttonStyles} className="Button-hover">Get Started ></button>
             </Link>
           </div>
         </div>
