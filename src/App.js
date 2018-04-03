@@ -4,6 +4,7 @@ import Options from "./components/Options";
 import Intro from "./components/Intro";
 import Random from "./components/Random/Random";
 import Others from "./components/Others/Others";
+import Upload from "./components/Upload/Upload";
 import "./App.css";
 import MediaQuery from "react-responsive";
 import { Route, Link } from "react-router-dom";
@@ -92,6 +93,7 @@ class App extends Component {
                 <Route exact path="/home" component={Intro} />
                 <Route path="/home/random" component={Random} />
                 <Route path="/home/others" component={Others} />
+                <Route path="/home/upload" component={Upload} />
               </div>
 
               </div>
@@ -108,6 +110,7 @@ class App extends Component {
                 <Route exact path="/home" component={Options} />
                 <Route path="/home/random" component={Random} />
                 <Route path="/home/others" component={Others} />
+                <Route path="/home/upload" component={Upload} />
           </div>
         </MediaQuery>
       </div>

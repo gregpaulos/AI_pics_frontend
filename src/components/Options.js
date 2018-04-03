@@ -25,10 +25,12 @@ export default function Options({ start }) {
               <p>Try a Random Photo</p>
             </div>
           </Link>
+          <Link style={linkStyles} to="/home/upload/step1">
           <div style={styles} className="Hover-darken">
             <h1>&uarr;</h1>
             <p>Upload Your Own Photo</p>
           </div>
+          </Link>
           <Link style={linkStyles} to="/home/others/all">
             <div style={styles} className="Hover-darken">
               <h1>&harr;</h1>
@@ -46,10 +48,12 @@ export default function Options({ start }) {
               <p>Try a Random Photo</p>
             </div>
           </Link>
+          <Link style={linkStyles} to="/home/upload/step1">
           <div style={styles}>
             <h1>&uarr;</h1>
             <p>Upload Your Own Photo</p>
           </div>
+          </Link>
           <Link style={linkStyles} to="/home/others/all">
             <div style={styles}>
               <h1>&harr;</h1>

@@ -1,4 +1,5 @@
-var startURL = "https://glacial-chamber-31453.herokuapp.com";
+// var startURL = "https://glacial-chamber-31453.herokuapp.com";
+var startURL = "http://localhost:5000"
 
 export const GET_ALL = 'GET_ALL'
 export function getAll() {
@@ -21,6 +22,24 @@ export function getPhoto() {
     dispatch({
       type: GET_PHOTO,
       payload: json
+    })
+  }
+}
+
+
+export const SHOW_USER_PHOTO = 'SHOW_USER_PHOTO'
+export const showUserPhoto = file => ({ type: SHOW_USER_PHOTO, payload: file });
+
+
+export const UPLOAD_PHOTO = 'UPLOAD_PHOTO'
+export function uploadPhoto(curFile, fileType) {
+  return async (dispatch) => {
+
+    let thing = 0
+   
+    dispatch({
+      type: UPLOAD_PHOTO,
+      payload: thing
     })
   }
 }
