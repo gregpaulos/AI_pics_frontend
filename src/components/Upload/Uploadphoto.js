@@ -1,21 +1,34 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { uploadPhoto, showUserPhoto } from "../../actions";
 import { Link } from "react-router-dom";
 
-const Uploadphoto = ({ photo, showUserPhoto, uploadPhoto }) => {
-  
-  const onChange = event => {
-    console.log("fart");
-    let newPic = event.target.files["0"];
-    console.log(newPic);
-    let localthing = window.URL.createObjectURL(newPic);
-    console.log(localthing);
-    showUserPhoto(localthing)
+class Uploadphoto extends Component {
+  state = { file: [] };
+  onSubmit = event => {
+    event.preventDefault();
+
+    console.log("Got to the submit biyatch");
+
+    let file = this.state.file[0]
+    console.log(file);
+    this.props.uploadPhoto(file);
   };
 
-  const styles = {
+  onChange = event => {
+    console.log("fart");
+    console.log(this.props);
+
+    let newPic = event.target.files["0"];
+    console.log(newPic);
+    let localurl = window.URL.createObjectURL(newPic);
+    console.log(localurl);
+    this.setState({ file: [newPic] });
+    this.props.showUserPhoto(localurl);
+  };
+
+  styles = {
     button: {
       borderRadius: "8px",
       padding: "10px",
@@ -29,40 +42,48 @@ const Uploadphoto = ({ photo, showUserPhoto, uploadPhoto }) => {
       color: "rgb(100, 100, 100)"
     }
   };
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <div>
+            <label htmlFor="image_uploads">
+              Choose an image to upload (PNG, JPG)
+            </label>
+            <p style={this.styles.disclaimer}>
+              Please DO NOT put anything offensive up here. You know what I'm
+              talking about.
+            </p>
 
-  return (
-    <div>
-      <form>
-        <div>
-          <label htmlFor="image_uploads">
-            Choose an image to upload (PNG, JPG)
-          </label>
-          <p style={styles.disclaimer}>
-            Please DO NOT put anything offensive up here. You know what I'm
-            talking about.
-          </p>
+            <input
+              type="file"
+              id="image_uploads"
+              name="image_uploads"
+              accept=".jpg, .jpeg, .png"
+              multiple
+              onChange={this.onChange}
+            />
+          </div>
+          <img src={this.props.photo} alt="" />
+          <div className="preview" />
 
-          <input
-            type="file"
-            id="image_uploads"
-            name="image_uploads"
-            accept=".jpg, .jpeg, .png"
-            multiple
-            onChange={onChange}
-          />
-        </div>
-        <img src={photo} alt=""/>
-        <div className="preview" />
-      </form>
+        <input id="submit" type="submit" value="Upload Photo" />
+        </form>
 
-      <Link to="/home/upload/step2">
-        <button style={styles.button} className="buttons" onClick={uploadPhoto}>
-          Upload Photo
-        </button>
-      </Link>
-    </div>
-  );
-};
+        <Link to="/home/upload/step2">
+          <button
+            style={this.styles.button}
+            className="buttons"
+            onClick={this.uploadPhoto}
+          >
+            Dont Touch
+          </button>
+        </Link>
+
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   photo: state.potentialUpload[0]
