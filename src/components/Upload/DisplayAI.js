@@ -4,7 +4,7 @@ import circle from "../../circles.svg";
 
 const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
   
-  console.log('WELL YOUR HERE')
+  console.log(photo_url)
   const styles = {
     photo: {
       width: "300px",
@@ -106,7 +106,7 @@ const mapStateToProps = state => ({
   google: state.google,
   clarifai: state.clarifai,
   watson: state.watson,
-  photo_url: state.randomPhoto[0]
+  photo_url: state.AWSurl[0]
 });
 
 export default connect(mapStateToProps)(DisplayAI);

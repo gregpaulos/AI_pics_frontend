@@ -11,7 +11,7 @@ class Uploadphoto extends Component {
 
     console.log("Got to the submit biyatch");
 
-    let file = this.state.file[0]
+    let file = this.state.file[0];
     console.log(file);
     this.props.uploadPhoto(file);
   };
@@ -42,9 +42,13 @@ class Uploadphoto extends Component {
       color: "rgb(100, 100, 100)"
     }
   };
+
   render() {
     return (
       <div>
+        <h1>{this.props.AWSurl? "GOT AWS" : "NOPE ON AWS"}</h1>
+        <h1>{this.props.photo ? "Yes"+this.props.photo : "No" }</h1>
+
         <form onSubmit={this.onSubmit}>
           <div>
             <label htmlFor="image_uploads">
@@ -67,7 +71,8 @@ class Uploadphoto extends Component {
           <img src={this.props.photo} alt="" />
           <div className="preview" />
 
-        <input id="submit" type="submit" value="Upload Photo" />
+          
+            <input id="submit" type="submit" value="Upload Photo" />
         </form>
 
         <Link to="/home/upload/step2">
@@ -76,17 +81,17 @@ class Uploadphoto extends Component {
             className="buttons"
             onClick={this.uploadPhoto}
           >
-            Dont Touch
+            Goto next section
           </button>
         </Link>
-
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  photo: state.potentialUpload[0]
+  photo: state.potentialUpload[0],
+  AWSurl: state.AWSurl[0]
 });
 
 const mapDispatchToProps = dispatch =>

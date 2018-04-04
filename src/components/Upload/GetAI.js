@@ -32,7 +32,7 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
   );
 
   const button = photo_url ? (
-    <Link to="/home/random/step3">
+    <Link to="/home/upload/step3">
       <button
         style={styles.button}
         className="buttons"
@@ -54,7 +54,7 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
 };
 
 const mapStateToProps = state => ({
-  photo_url: state.randomPhoto[0]
+  photo_url: state.AWSurl[0]
 });
 
 const mapDispatchToProps = dispatch =>
