@@ -2,14 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import circle from "../../circles.svg";
-import { clearUpload } from "../../actions";
 
-const DisplayAI = ({ watson, clarifai, google, photo_url, clearUpload }) => {
+
+const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
   
-
-  clearUpload()
-
-  console.log(photo_url)
   const styles = {
     photo: {
       width: "300px",
@@ -115,13 +111,5 @@ const mapStateToProps = state => ({
 });
 
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      clearUpload: clearUpload
-    },
-    dispatch
-  );
-
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayAI);
+export default connect(mapStateToProps)(DisplayAI);
 

@@ -4,8 +4,10 @@ import MediaQuery from "react-responsive";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { clearAWS } from "../actions";
+import { clearUpload } from "../actions";
+import { clearAI } from "../actions";
 
-const Options = ({ start, clearAWS }) => {
+const Options = ({ start, clearAWS, clearUpload, clearAI }) => {
 // export default function Options({ start }) {
   const styles = {
     height: "125px",
@@ -20,12 +22,14 @@ const Options = ({ start, clearAWS }) => {
   };
 
   const farts = () => {
-    console.log('CLICKED ON UPLOAD AFRESH')
+    console.log('CLICKED ON FARTS')
     clearAWS()
+    clearUpload()
+    clearAI()
   }
 
   return (
-    <div>
+    <div onClick={farts}>
       <MediaQuery query="(min-device-width: 1224px)">
         <div>
           <Link style={linkStyles} to="/home/random/step1">
@@ -34,7 +38,7 @@ const Options = ({ start, clearAWS }) => {
               <p>Try a Random Photo</p>
             </div>
           </Link>
-          <Link style={linkStyles} to="/home/upload/step1" onClick={farts}>
+          <Link style={linkStyles} to="/home/upload/step1">
           <div style={styles} className="Hover-darken">
             <h1>&uarr;</h1>
             <p>Upload Your Own Photo</p>
@@ -84,7 +88,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      clearAWS: clearAWS
+      clearAWS: clearAWS,
+      clearUpload: clearUpload,
+      clearAI: clearAI,
     },
     dispatch
   );

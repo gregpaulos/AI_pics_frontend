@@ -32,9 +32,11 @@ export const showUserPhoto = file => ({ type: SHOW_USER_PHOTO, payload: file });
 export const CLEAR_UPLOAD = "CLEAR_UPLOAD";
 export const clearUpload = () => ({ type: CLEAR_UPLOAD });
 
-
 export const CLEAR_AWS = "CLEAR_AWS";
 export const clearAWS = () => ({ type: CLEAR_AWS });
+
+export const CLEAR_AI = "CLEAR_AI";
+export const clearAI = () => ({ type: CLEAR_AI });
 
 export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
 export function uploadPhoto(file) {
@@ -47,7 +49,7 @@ export function uploadPhoto(file) {
       fileType: fileType
     };
     let JSONbodyToPost = JSON.stringify(bodyToPost);
-    // let AWSurl =0
+ 
     const AWSurl = await fetch(url1, {
       method: "post",
       body: JSONbodyToPost,

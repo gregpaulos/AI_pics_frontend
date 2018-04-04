@@ -5,7 +5,8 @@ import {
   GET_AI,
   GET_ALL,
   CLEAR_UPLOAD,
-  CLEAR_AWS
+  CLEAR_AWS,
+  CLEAR_AI
 } from "../actions/index";
 
 const initialState = {
@@ -28,8 +29,15 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, AWSurl: [action.payload] };
     case CLEAR_UPLOAD:
       return { ...state, potentialUpload: [] };
-      case CLEAR_AWS:
+    case CLEAR_AWS:
       return { ...state, AWSurl: [] };
+    case CLEAR_AI:
+      return {
+        ...state,
+        watson: [],
+        google: [],
+        clarifai: []
+      };
     case GET_AI:
       return { ...state, [action.api]: action.payload };
     case GET_ALL:
