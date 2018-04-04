@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { clearAWS } from "../actions";
 
-export default function Options({ start }) {
+const Options = ({ start, clearAWS }) => {
+// export default function Options({ start }) {
   const styles = {
     height: "125px",
     borderBottomStyle: "solid",
@@ -15,6 +19,11 @@ export default function Options({ start }) {
     color: "white"
   };
 
+  const farts = () => {
+    console.log('CLICKED ON UPLOAD AFRESH')
+    clearAWS()
+  }
+
   return (
     <div>
       <MediaQuery query="(min-device-width: 1224px)">
@@ -25,7 +34,7 @@ export default function Options({ start }) {
               <p>Try a Random Photo</p>
             </div>
           </Link>
-          <Link style={linkStyles} to="/home/upload/step1">
+          <Link style={linkStyles} to="/home/upload/step1" onClick={farts}>
           <div style={styles} className="Hover-darken">
             <h1>&uarr;</h1>
             <p>Upload Your Own Photo</p>
@@ -48,7 +57,7 @@ export default function Options({ start }) {
               <p>Try a Random Photo</p>
             </div>
           </Link>
-          <Link style={linkStyles} to="/home/upload/step1">
+          <Link style={linkStyles} to="/home/upload/step1" onClick={farts}>
           <div style={styles}>
             <h1>&uarr;</h1>
             <p>Upload Your Own Photo</p>
@@ -65,3 +74,19 @@ export default function Options({ start }) {
     </div>
   );
 }
+
+
+
+const mapStateToProps = state => ({
+  photo_url: state.AWSurl[0]
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      clearAWS: clearAWS
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Options);

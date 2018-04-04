@@ -29,6 +29,13 @@ export function getPhoto() {
 export const SHOW_USER_PHOTO = "SHOW_USER_PHOTO";
 export const showUserPhoto = file => ({ type: SHOW_USER_PHOTO, payload: file });
 
+export const CLEAR_UPLOAD = "CLEAR_UPLOAD";
+export const clearUpload = () => ({ type: CLEAR_UPLOAD });
+
+
+export const CLEAR_AWS = "CLEAR_AWS";
+export const clearAWS = () => ({ type: CLEAR_AWS });
+
 export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
 export function uploadPhoto(file) {
   return async dispatch => {

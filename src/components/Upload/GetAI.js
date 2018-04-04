@@ -31,7 +31,7 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
     <img src={circle} style={styles.photo} alt="" />
   );
 
-  const button = photo_url ? (
+  const button = (
     <Link to="/home/upload/step3">
       <button
         style={styles.button}
@@ -41,13 +41,10 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
         Send to the Robots >{" "}
       </button>
     </Link>
-  ) : (
-    <h3>Loading random photo...</h3>
-  );
+  ) 
 
   return (
     <div>
-      <div>{image}</div>
       <div>{button}</div>
     </div>
   );

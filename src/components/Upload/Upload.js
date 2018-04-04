@@ -14,7 +14,7 @@ const Upload = ({AWSurl}) => {
         {/* {currentView} */}
       {/* <Uploadphoto />   */}
       <Route path="/home/upload/step1" component={Uploadphoto} />
-      <Route path="/home/upload/step2" component={GetAI} />
+      {/* <Route path="/home/upload/step2" component={GetAI} /> */}
       <Route path="/home/upload/step3" component={DisplayAI} />
     </div>
   );

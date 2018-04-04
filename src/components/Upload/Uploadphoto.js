@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { uploadPhoto, showUserPhoto } from "../../actions";
 import { Link } from "react-router-dom";
+import GetAI from "./GetAI";
 
 class Uploadphoto extends Component {
   state = { file: [] };
@@ -46,9 +47,6 @@ class Uploadphoto extends Component {
   render() {
     return (
       <div>
-        <h1>{this.props.AWSurl? "GOT AWS" : "NOPE ON AWS"}</h1>
-        <h1>{this.props.photo ? "Yes"+this.props.photo : "No" }</h1>
-
         <form onSubmit={this.onSubmit}>
           <div>
             <label htmlFor="image_uploads">
@@ -59,23 +57,30 @@ class Uploadphoto extends Component {
               talking about.
             </p>
 
-            <input
-              type="file"
-              id="image_uploads"
-              name="image_uploads"
-              accept=".jpg, .jpeg, .png"
-              multiple
-              onChange={this.onChange}
-            />
+            {this.props.AWSurl ? (
+              ""
+            ) : (
+              <input
+                type="file"
+                id="image_uploads"
+                name="image_uploads"
+                accept=".jpg, .jpeg, .png"
+                multiple
+                onChange={this.onChange}
+              />
+            )}
           </div>
           <img src={this.props.photo} alt="" />
           <div className="preview" />
 
-          
+          {this.props.AWSurl ? (
+            <GetAI />
+          ) : (
             <input id="submit" type="submit" value="Upload Photo" />
+          )}
         </form>
 
-        <Link to="/home/upload/step2">
+        {/* <Link to="/home/upload/step2">
           <button
             style={this.styles.button}
             className="buttons"
@@ -83,7 +88,7 @@ class Uploadphoto extends Component {
           >
             Goto next section
           </button>
-        </Link>
+        </Link> */}
       </div>
     );
   }

@@ -3,7 +3,9 @@ import {
   SHOW_USER_PHOTO,
   UPLOAD_PHOTO,
   GET_AI,
-  GET_ALL
+  GET_ALL,
+  CLEAR_UPLOAD,
+  CLEAR_AWS
 } from "../actions/index";
 
 const initialState = {
@@ -24,6 +26,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, potentialUpload: [action.payload] };
     case UPLOAD_PHOTO:
       return { ...state, AWSurl: [action.payload] };
+    case CLEAR_UPLOAD:
+      return { ...state, potentialUpload: [] };
+      case CLEAR_AWS:
+      return { ...state, AWSurl: [] };
     case GET_AI:
       return { ...state, [action.api]: action.payload };
     case GET_ALL:
