@@ -13,7 +13,8 @@ const All = ({ all, getAll }) => {
       padding: "20px"
     },
     photo: {
-      width: "70px",
+      maxWidth: "140px",
+      maxHeight: "140px",
       padding: "20px"
     },
     button: {
@@ -22,17 +23,19 @@ const All = ({ all, getAll }) => {
       cursor: "pointer"
     },
     flexin: {
-      //   display: "flex-wrap"
+      display: "flex",
+      alignItems: "center",
+      flexWrap: "wrap",
     },
     card: {
-      display: "inline-block",
       boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
       transition: "0.3s",
       width: "180px",
+      height: "180px",
       margin: "10px",
       marginTop: "40px",
       zIndex: "1",
-      animation: "dropin 3s"
+      animation: "fadein 3s"
     }
   };
 
