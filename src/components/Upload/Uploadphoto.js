@@ -1,39 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { uploadPhoto, showUserPhoto } from "../../actions";
-import { Link } from "react-router-dom";
+import { showUserPhoto, addFile } from "../../actions";
 import GetAI from "./GetAI";
 
-class Uploadphoto extends Component {
-  state = { file: [] };
-  onSubmit = event => {
-    event.preventDefault();
-
-    console.log("Got to the submit biyatch");
-
-    let file = this.state.file[0];
-    console.log(file);
-    this.props.uploadPhoto(file);
-  };
-
-  onChange = event => {
-    console.log("fart");
-    console.log(this.props);
-
+const Uploadphoto = ({
+  photo,
+  file,
+  showUserPhoto,
+  addFile
+}) => {
+  const onChange = event => {
     let newPic = event.target.files["0"];
-    console.log(newPic);
     let localurl = window.URL.createObjectURL(newPic);
-    console.log(localurl);
-    this.setState({ file: [newPic] });
-    this.props.showUserPhoto(localurl);
+    addFile(newPic);
+    showUserPhoto(localurl);
   };
 
-  styles = {
+  const styles = {
     button: {
       borderRadius: "8px",
       padding: "10px",
       cursor: "pointer"
+    },
+    photo: {
+      width: "400px",
+      padding: "10px"
     },
     disclaimer: {
       fontSize: "80%"
@@ -44,66 +36,41 @@ class Uploadphoto extends Component {
     }
   };
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label htmlFor="image_uploads">
-              Choose an image to upload (PNG, JPG)
-            </label>
-            <p style={this.styles.disclaimer}>
-              Please DO NOT put anything offensive up here. You know what I'm
-              talking about.
-            </p>
-
-            {this.props.AWSurl ? (
-              ""
-            ) : (
-              <input
-                type="file"
-                id="image_uploads"
-                name="image_uploads"
-                accept=".jpg, .jpeg, .png"
-                multiple
-                onChange={this.onChange}
-              />
-            )}
-          </div>
-          <img src={this.props.photo} alt="" />
-          <div className="preview" />
-
-          {this.props.AWSurl ? (
-            <GetAI />
-          ) : (
-            <input id="submit" type="submit" value="Upload Photo" />
-          )}
-        </form>
-
-        {/* <Link to="/home/upload/step2">
-          <button
-            style={this.styles.button}
-            className="buttons"
-            onClick={this.uploadPhoto}
-          >
-            Goto next section
-          </button>
-        </Link> */}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form>
+        <div>
+          <h3>Choose an image to upload (PNG, JPG)</h3>
+          <p style={styles.disclaimer}>
+            Please DO NOT put anything offensive up here. You know what I'm
+            talking about.
+          </p>
+          <input
+            type="file"
+            id="image_uploads"
+            name="image_uploads"
+            accept=".jpg, .jpeg, .png"
+            multiple
+            onChange={onChange}
+          />
+        </div>
+        <img src={photo} style={styles.photo} alt="" />
+        {file.length > 0 ? <GetAI /> : ""}
+      </form>
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   photo: state.potentialUpload[0],
-  AWSurl: state.AWSurl[0]
+  file: state.file
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       showUserPhoto: showUserPhoto,
-      uploadPhoto: uploadPhoto
+      addFile: addFile
     },
     dispatch
   );

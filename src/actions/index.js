@@ -27,7 +27,13 @@ export function getPhoto() {
 }
 
 export const SHOW_USER_PHOTO = "SHOW_USER_PHOTO";
-export const showUserPhoto = file => ({ type: SHOW_USER_PHOTO, payload: file });
+export const showUserPhoto = localURL => ({
+  type: SHOW_USER_PHOTO,
+  payload: localURL
+});
+
+export const ADD_FILE = "ADD_FILE";
+export const addFile = file => ({ type: ADD_FILE, payload: file });
 
 export const CLEAR_UPLOAD = "CLEAR_UPLOAD";
 export const clearUpload = () => ({ type: CLEAR_UPLOAD });
@@ -49,7 +55,7 @@ export function uploadPhoto(file) {
       fileType: fileType
     };
     let JSONbodyToPost = JSON.stringify(bodyToPost);
- 
+
     const AWSurl = await fetch(url1, {
       method: "post",
       body: JSONbodyToPost,
@@ -72,7 +78,7 @@ export function uploadPhoto(file) {
       })
       .then(url => {
         console.log("ITS DONE WITH ", url);
-        return url
+        return url;
       })
       .catch(error => {
         console.log(error);

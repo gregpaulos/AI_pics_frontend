@@ -10,10 +10,10 @@ const RandomIntro = () => {
   return (
     <div>
       <MediaQuery query="(min-device-width: 1224px)">
-        <h4>
+        <h3>
           Click the button below to get a random photo from the unsplash
-          photography website.{" "}
-        </h4>
+          photography website.
+        </h3>
         <GetPhoto />
         <h4>Or for a different option, click one of the boxes on the left.</h4>
       </MediaQuery>

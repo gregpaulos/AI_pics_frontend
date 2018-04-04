@@ -1,11 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { getAI } from "../../actions";
 import circle from "../../circles.svg";
 
+const DisplayAI = ({ watson, clarifai, google, photo_url, getAI }) => {
+  const requestToGetAI = api => {
+    getAI(photo_url, api);
+  };
 
-const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
-  
+  // if (photo_url && google.length < 1) requestToGetAI("google")
+  // if (photo_url && watson.length < 1) requestToGetAI("watson")
+  // if (photo_url && clarifai.length < 1) requestToGetAI("clarifai")
+
   const styles = {
     photo: {
       width: "300px",
@@ -27,6 +34,17 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
     }
   };
 
+  const photo = photo_url ? (
+    <img src={photo_url} style={styles.photo} alt="" />
+  ) : (
+    <div>
+      <div>Loading photo...</div>
+      <div>
+        <img src={circle} alt="" />
+      </div>
+    </div>
+  );
+
   const googlelist = google.map(el => {
     return <li key={el}>{el}</li>;
   });
@@ -38,8 +56,7 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
       <div>
         <div>Robot Thinking...</div>
         <div>
-          {" "}
-          <img src={circle} alt="" />
+          <img src={circle} alt={requestToGetAI("google")} />
         </div>
       </div>
     );
@@ -57,8 +74,7 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
       <div>
         <div>Robot Thinking...</div>
         <div>
-          {" "}
-          <img src={circle} alt="" />
+          <img src={circle} alt={requestToGetAI("clarifai")} />
         </div>
       </div>
     );
@@ -74,31 +90,34 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
       <div>
         <div>Robot Thinking...</div>
         <div>
-          {" "}
-          <img src={circle} alt="" />
+          <img src={circle} alt={requestToGetAI("watson")} />
         </div>
       </div>
     );
 
+  const robots = photo_url ? (
+    <div style={styles.flexin}>
+      <div style={styles.card}>
+        <h4>Google</h4>
+        <div>{googledisplay}</div>
+      </div>
+      <div style={styles.card}>
+        <h4>Clarifai</h4>
+        <div>{clarifaidisplay}</div>
+      </div>
+      <div style={styles.card}>
+        <h4>Watson</h4>
+        <div>{watsondisplay}</div>
+      </div>
+    </div>
+  ) : (
+    <div></div>
+  );
+
   return (
     <div>
-      <div>
-        <img src={photo_url} style={styles.photo} alt="" />
-      </div>
-      <div style={styles.flexin}>
-        <div style={styles.card}>
-          <h4>Google</h4>
-          <div>{googledisplay}</div>
-        </div>
-        <div style={styles.card}>
-          <h4>Clarifai</h4>
-          <div>{clarifaidisplay}</div>
-        </div>
-        <div style={styles.card}>
-          <h4>Watson</h4>
-          <div>{watsondisplay}</div>
-        </div>
-      </div>
+      <div>{photo}</div>
+      <div>{robots}</div>
     </div>
   );
 };
@@ -110,6 +129,12 @@ const mapStateToProps = state => ({
   photo_url: state.AWSurl[0]
 });
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      getAI: getAI
+    },
+    dispatch
+  );
 
-export default connect(mapStateToProps)(DisplayAI);
-
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayAI);

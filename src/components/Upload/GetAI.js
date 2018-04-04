@@ -1,17 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAI } from "../../actions";
+import { uploadPhoto } from "../../actions";
 import circle from "../../circles.svg";
 import { Link } from "react-router-dom";
 
-const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
-  const requestToGetAI = () => {
-    let apis = ["watson", "google", "clarifai"];
-    apis.forEach(api => {
-      getAI(photo_url, api);
-    });
+const GetAI = ({ uploadPhoto, photo_url, file }) => {
+  const upload = () => {
+    uploadPhoto(file)
   };
+
 
   const styles = {
     photo: {
@@ -25,20 +23,14 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
     }
   };
 
-  const image = photo_url ? (
-    <img src={photo_url} style={styles.photo} alt="" />
-  ) : (
-    <img src={circle} style={styles.photo} alt="" />
-  );
-
   const button = (
-    <Link to="/home/upload/step3">
+    <Link to="/home/upload/showAI">
       <button
         style={styles.button}
         className="buttons"
-        onClick={requestToGetAI}
+        onClick={upload}
       >
-        Send to the Robots >{" "}
+        Send to the Robots >
       </button>
     </Link>
   ) 
@@ -51,13 +43,14 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
 };
 
 const mapStateToProps = state => ({
-  photo_url: state.AWSurl[0]
+  photo_url: state.AWSurl[0],
+  file: state.file[0]
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getAI: getAI
+      uploadPhoto: uploadPhoto
     },
     dispatch
   );

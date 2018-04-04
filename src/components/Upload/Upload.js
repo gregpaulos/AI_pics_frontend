@@ -1,9 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import Uploadphoto from "./Uploadphoto";
-import GetAI from "./GetAI";
 import DisplayAI from "./DisplayAI";
 
 const Upload = () => {

@@ -6,12 +6,14 @@ import {
   GET_ALL,
   CLEAR_UPLOAD,
   CLEAR_AWS,
-  CLEAR_AI
+  CLEAR_AI,
+  ADD_FILE
 } from "../actions/index";
 
 const initialState = {
   randomPhoto: [],
   potentialUpload: [],
+  file: [],
   AWSurl: [],
   watson: [],
   google: [],
@@ -25,10 +27,12 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, randomPhoto: [action.payload] };
     case SHOW_USER_PHOTO:
       return { ...state, potentialUpload: [action.payload] };
+    case ADD_FILE:
+      return { ...state, file: [action.payload] };
     case UPLOAD_PHOTO:
       return { ...state, AWSurl: [action.payload] };
     case CLEAR_UPLOAD:
-      return { ...state, potentialUpload: [] };
+      return { ...state, potentialUpload: [], file:[] };
     case CLEAR_AWS:
       return { ...state, AWSurl: [] };
     case CLEAR_AI:
