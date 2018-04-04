@@ -23,6 +23,10 @@ const Uploadphoto = ({
       padding: "10px",
       cursor: "pointer"
     },
+    fileinput: {
+      borderRadius: "8px",
+      padding: "10px",
+    },
     photo: {
       width: "400px",
       padding: "10px"
@@ -46,6 +50,7 @@ const Uploadphoto = ({
             talking about.
           </p>
           <input
+          style={styles.fileinput}
             type="file"
             id="image_uploads"
             name="image_uploads"

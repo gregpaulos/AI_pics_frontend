@@ -1,5 +1,5 @@
-// var startURL = "https://glacial-chamber-31453.herokuapp.com";
-var startURL = "http://localhost:5000";
+var startURL = "https://glacial-chamber-31453.herokuapp.com";
+// var startURL = "http://localhost:5000";
 
 export const GET_ALL = "GET_ALL";
 export function getAll() {

@@ -59,7 +59,7 @@ const Options = ({ start, clearAWS, clearUpload, clearAI }) => {
               <p>Try a Random Photo</p>
             </div>
           </Link>
-          <Link style={linkStyles} to="/home/upload/step1" >
+          <Link style={linkStyles} to="/home/upload/getphoto" >
             <div style={styles}>
               <h1>&uarr;</h1>
               <p>Upload Your Own Photo</p>
