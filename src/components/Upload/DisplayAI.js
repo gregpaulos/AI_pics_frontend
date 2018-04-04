@@ -56,7 +56,7 @@ const DisplayAI = ({ watson, clarifai, google, photo_url, getAI }) => {
       <div>
         <div>Robot Thinking...</div>
         <div>
-          <img src={circle} alt={requestToGetAI("google")} />
+          <img src={circle} alt="" />
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ const DisplayAI = ({ watson, clarifai, google, photo_url, getAI }) => {
       <div>
         <div>Robot Thinking...</div>
         <div>
-          <img src={circle} alt={requestToGetAI("clarifai")} />
+          <img src={circle} alt="" />
         </div>
       </div>
     );
@@ -90,7 +90,7 @@ const DisplayAI = ({ watson, clarifai, google, photo_url, getAI }) => {
       <div>
         <div>Robot Thinking...</div>
         <div>
-          <img src={circle} alt={requestToGetAI("watson")} />
+          <img src={circle} alt=""/>
         </div>
       </div>
     );

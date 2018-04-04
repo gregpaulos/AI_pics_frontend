@@ -114,3 +114,195 @@ export function getAI(photo_url, api) {
     });
   };
 }
+
+// TRYING TO DO SEQUENTIAL ACTIONS
+
+export const UPLOAD_SEND = "UPLOAD_SEND";
+export function uploadANDsend(file) {
+  return async dispatch => {
+    const AWS = await uploadPhoto2(file);
+    console.log("GOT HERE", AWS);
+
+    dispatch({
+      type: UPLOAD_PHOTO,
+      payload: AWS
+    });
+
+    let apis = ["watson", "google", "clarifai"];
+
+    getAI2(AWS, "watson").then(watsonjson => {
+      dispatch({
+        type: GET_AI,
+        api: "watson",
+        payload: watsonjson
+      });
+    });
+    getAI2(AWS, "google").then(googlejson => {
+      dispatch({
+        type: GET_AI,
+        api: "google",
+        payload: googlejson
+      });
+    });
+    getAI2(AWS, "clarifai").then(clarifaijson => {
+      dispatch({
+        type: GET_AI,
+        api: "clarifai",
+        payload: clarifaijson
+      });
+    });
+    // const watsonjson = await getAI2(AWS, "watson");
+    // dispatch({
+    //   type: GET_AI,
+    //   api: "watson",
+    //   payload: watsonjson
+    // });
+
+    // const googlejson = await getAI2(AWS, "google");
+    // dispatch({
+    //   type: GET_AI,
+    //   api: "google",
+    //   payload: googlejson
+    // });
+    // const clarifaijson = await getAI2(AWS, "clarifai");
+    // dispatch({
+    //   type: GET_AI,
+    //   api: "clarifai",
+    //   payload: clarifaijson
+    // });
+
+    // apis.forEach(api => {
+    //   console.log("then got here", api);
+
+    //   const json = getAI2(AWS, api);
+
+    // dispatch({
+    //   type: GET_AI,
+    //   api: api,
+    //   payload: json
+    // });
+  };
+}
+
+async function getAI2(photo_url, api) {
+  console.log("Inside GETAI2", photo_url, api);
+  var bodyToPost = {
+    photo: photo_url
+  };
+  let JSONbodyToPost = JSON.stringify(bodyToPost);
+  let url = startURL + "/v1/ai/" + api;
+
+  const response = await fetch(url, {
+    method: "post",
+    body: JSONbodyToPost,
+    headers: { "Content-Type": "application/json" }
+  });
+  const json = await response.json();
+  return json;
+}
+
+async function uploadPhoto2(file) {
+  console.log("step 1");
+  let url1 = startURL + "/v1/photos/clientupload";
+
+  let fileType = file.type;
+
+  var bodyToPost = {
+    fileType: fileType
+  };
+  let JSONbodyToPost = JSON.stringify(bodyToPost);
+
+  const AWSurl = await fetch(url1, {
+    method: "post",
+    body: JSONbodyToPost,
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      const options = {
+        method: "PUT",
+        body: file
+      };
+      return fetch(data.signedRequest, options).then(response => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+        return data.url;
+      });
+    })
+    .then(url => {
+      console.log("ITS DONE WITH ", url);
+      return url;
+    })
+    .catch(error => {
+      console.log(error);
+      return error;
+    });
+
+  return AWSurl;
+}
+
+// async function getAI2(photo_url, api) {
+//   console.log('Inside GETAI2', photo_url, api);
+//   var bodyToPost = {
+//     photo: photo_url
+//   };
+//   let JSONbodyToPost = JSON.stringify(bodyToPost);
+//   let url = startURL + "/v1/ai/" + api;
+
+//     const response = await fetch(url, {
+//       method: "post",
+//       body: JSONbodyToPost,
+//       headers: { "Content-Type": "application/json" }
+//     });
+//     const json = await response.json();
+//     return json
+//   };
+
+// export const UPLOAD_SEND = "UPLOAD_SEND";
+// export function uploadANDsend(file) {
+//   return async dispatch => {
+//     const AWS = await uploadPhoto2(file);
+//     console.log("GOT HERE", AWS);
+
+//     dispatch({
+//       type: UPLOAD_PHOTO,
+//       payload: AWS
+//     }).then(
+
+//       console.log('DO I EVER GET HERE?')
+//       // let apis = ["watson", "google", "clarifai"];
+
+//       // apis.forEach(api => {
+//       //   console.log("then got here", api);
+
+//       //   const json = await getAI2(AWS, api);
+
+//       //   dispatch({
+//       //     type: GET_AI,
+//       //     api: api,
+//       //     payload: json
+//       //   });
+//       // }
+
+//     )
+//   };
+
+//   // dataAfterOnList => {
+//   // dispatch(setSkip(dataAfterOnList));
+//   // }
+// }
+
+// export const GET_PHOTO = "GET_PHOTO";
+// export function getPhoto() {
+//   return async dispatch => {
+//     const response = await fetch(startURL + "/v1/photos/random");
+//     const json = await response.json();
+//     dispatch({
+//       type: GET_PHOTO,
+//       payload: json
+//     });
+//   };
+// }

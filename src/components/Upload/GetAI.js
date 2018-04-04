@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { uploadPhoto } from "../../actions";
+import { uploadPhoto , uploadANDsend} from "../../actions";
 import circle from "../../circles.svg";
 import { Link } from "react-router-dom";
 
-const GetAI = ({ uploadPhoto, photo_url, file }) => {
+const GetAI = ({ uploadPhoto, uploadANDsend, file }) => {
   const upload = () => {
-    uploadPhoto(file)
+    uploadANDsend(file)
+    // uploadPhoto(file)
   };
 
 
@@ -43,14 +44,14 @@ const GetAI = ({ uploadPhoto, photo_url, file }) => {
 };
 
 const mapStateToProps = state => ({
-  photo_url: state.AWSurl[0],
   file: state.file[0]
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      uploadPhoto: uploadPhoto
+      uploadPhoto: uploadPhoto,
+      uploadANDsend: uploadANDsend
     },
     dispatch
   );
