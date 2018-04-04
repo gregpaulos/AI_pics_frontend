@@ -23,7 +23,6 @@ const Individual = ({ match, all, getAll }) => {
       margin: "10px",
       marginTop: "40px",
       zIndex: "1",
-      animation: "dropin 3s"
     }
   };
 
