@@ -129,58 +129,15 @@ export function uploadANDsend(file) {
     });
 
     let apis = ["watson", "google", "clarifai"];
-
-    getAI2(AWS, "watson").then(watsonjson => {
-      dispatch({
-        type: GET_AI,
-        api: "watson",
-        payload: watsonjson
+    apis.forEach(api => {
+      getAI2(AWS, api).then(json => {
+        dispatch({
+          type: GET_AI,
+          api: api,
+          payload: json
+        });
       });
     });
-    getAI2(AWS, "google").then(googlejson => {
-      dispatch({
-        type: GET_AI,
-        api: "google",
-        payload: googlejson
-      });
-    });
-    getAI2(AWS, "clarifai").then(clarifaijson => {
-      dispatch({
-        type: GET_AI,
-        api: "clarifai",
-        payload: clarifaijson
-      });
-    });
-    // const watsonjson = await getAI2(AWS, "watson");
-    // dispatch({
-    //   type: GET_AI,
-    //   api: "watson",
-    //   payload: watsonjson
-    // });
-
-    // const googlejson = await getAI2(AWS, "google");
-    // dispatch({
-    //   type: GET_AI,
-    //   api: "google",
-    //   payload: googlejson
-    // });
-    // const clarifaijson = await getAI2(AWS, "clarifai");
-    // dispatch({
-    //   type: GET_AI,
-    //   api: "clarifai",
-    //   payload: clarifaijson
-    // });
-
-    // apis.forEach(api => {
-    //   console.log("then got here", api);
-
-    //   const json = getAI2(AWS, api);
-
-    // dispatch({
-    //   type: GET_AI,
-    //   api: api,
-    //   payload: json
-    // });
   };
 }
 
@@ -243,66 +200,3 @@ async function uploadPhoto2(file) {
 
   return AWSurl;
 }
-
-// async function getAI2(photo_url, api) {
-//   console.log('Inside GETAI2', photo_url, api);
-//   var bodyToPost = {
-//     photo: photo_url
-//   };
-//   let JSONbodyToPost = JSON.stringify(bodyToPost);
-//   let url = startURL + "/v1/ai/" + api;
-
-//     const response = await fetch(url, {
-//       method: "post",
-//       body: JSONbodyToPost,
-//       headers: { "Content-Type": "application/json" }
-//     });
-//     const json = await response.json();
-//     return json
-//   };
-
-// export const UPLOAD_SEND = "UPLOAD_SEND";
-// export function uploadANDsend(file) {
-//   return async dispatch => {
-//     const AWS = await uploadPhoto2(file);
-//     console.log("GOT HERE", AWS);
-
-//     dispatch({
-//       type: UPLOAD_PHOTO,
-//       payload: AWS
-//     }).then(
-
-//       console.log('DO I EVER GET HERE?')
-//       // let apis = ["watson", "google", "clarifai"];
-
-//       // apis.forEach(api => {
-//       //   console.log("then got here", api);
-
-//       //   const json = await getAI2(AWS, api);
-
-//       //   dispatch({
-//       //     type: GET_AI,
-//       //     api: api,
-//       //     payload: json
-//       //   });
-//       // }
-
-//     )
-//   };
-
-//   // dataAfterOnList => {
-//   // dispatch(setSkip(dataAfterOnList));
-//   // }
-// }
-
-// export const GET_PHOTO = "GET_PHOTO";
-// export function getPhoto() {
-//   return async dispatch => {
-//     const response = await fetch(startURL + "/v1/photos/random");
-//     const json = await response.json();
-//     dispatch({
-//       type: GET_PHOTO,
-//       payload: json
-//     });
-//   };
-// }
