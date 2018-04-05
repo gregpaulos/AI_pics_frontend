@@ -4,7 +4,6 @@ import circle from "../../circles.svg";
 
 const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
   
-  console.log('WELL YOUR HERE')
   const styles = {
     photo: {
       width: "300px",

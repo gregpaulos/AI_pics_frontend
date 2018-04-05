@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { getAI } from "../../actions";
 import circle from "../../circles.svg";
 import { Link } from "react-router-dom";
+import MediaQuery from "react-responsive";      
 
 const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
   const requestToGetAI = () => {
@@ -22,7 +23,16 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
       borderRadius: "8px",
       padding: "10px",
       cursor: "pointer"
+    },
+    buttonPhone: {
+      padding: "10px",
+      fontSize: "1.25em",
+      fontWeight: "700",
+      color: "black",
+      backgroundColor: "white",
+      display: "inline-block"
     }
+
   };
 
   const image = photo_url ? (
@@ -32,15 +42,33 @@ const GetAI = ({ watson, clarifai, google, getAI, photo_url }) => {
   );
 
   const button = photo_url ? (
-    <Link to="/home/random/step3">
-      <button
-        style={styles.button}
-        className="buttons"
-        onClick={requestToGetAI}
-      >
-        Send to the Robots >{" "}
-      </button>
-    </Link>
+    <div>
+      <MediaQuery query="(min-device-width: 1224px)">
+        <div>
+          <Link to="/home/random/step3">
+            <button
+              style={styles.button}
+              className="buttons"
+              onClick={requestToGetAI}
+            >
+              Send to the Robots >
+            </button>
+          </Link>
+        </div>
+      </MediaQuery>
+
+      <MediaQuery query="(max-device-width: 1224px)">
+        <Link to="/home/random/step3">
+          <button
+            style={styles.buttonPhone}
+            className="buttons"
+            onClick={requestToGetAI}
+          >
+            Send to the Robots >
+          </button>
+        </Link>
+      </MediaQuery>
+    </div>
   ) : (
     <h3>Loading random photo...</h3>
   );

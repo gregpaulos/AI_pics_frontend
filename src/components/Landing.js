@@ -3,34 +3,47 @@ import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
 
 export default function Landing({ start }) {
-  var buttonStyles = {
-    color: "black",
-    fontSize: "1.5em",
-    borderRadius: "8px",
-    padding: "10px",
-    cursor: "pointer"
+
+  const styles = {
+    button : {
+      color: "black",
+      fontSize: "1.5em",
+      borderRadius: "8px",
+      padding: "10px",
+      cursor: "pointer"
+    },
+    buttonPhone: {
+      padding: "10px",
+      fontSize: "1.25em",
+      fontWeight: "700",
+      color: "black",
+      backgroundColor: "white",
+      display: "inline-block"
+    },
+    imageStyles : {
+      backgroundColor: "black",
+      backgroundImage: "url(./robots.jpg)",
+      height: "100%",
+      padding: "300px",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover"
+    },
+
+    divStyle : {
+      color: "white"
+    },
+ 
+  
   };
 
-  var imageStyles = {
-    backgroundColor: "black",
-    backgroundImage: "url(./robots.jpg)",
-    height: "100%",
-    padding: "300px",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"
-  };
-
-  var divStyle = {
-    color: "white"
-  };
 
   return (
     <div>
       <MediaQuery query="(min-device-width: 1224px)">
-        <div style={imageStyles}>
+        <div style={styles.imageStyles}>
           <div>
-            <div style={divStyle}>
+            <div style={styles.divStyle}>
               <h1>Let's Test Our Robot Overlords!</h1>
               <p>
                 They may rule the world soon, but let's see how good they are at
@@ -38,7 +51,7 @@ export default function Landing({ start }) {
               </p>
             </div>
             <Link to="/home">
-              <button style={buttonStyles}>Get Started ></button>
+              <button style={styles.button}>Get Started ></button>
             </Link>
           </div>
         </div>
@@ -46,20 +59,20 @@ export default function Landing({ start }) {
       <MediaQuery query="(max-device-width: 1224px)">
         <div
           style={{
-            ...imageStyles,
+            ...styles.imageStyles,
             padding: "30px",
             paddingTop: "100px",
             paddingBottom: "500px"
           }}
         >
-          <div style={divStyle}>
+          <div style={styles.divStyle}>
             <h1>Let's Test Our Robot Overlords!</h1>
             <p>
               They may rule the world soon, but let's see how good they are at
               recognizing what's in a picture right now.
             </p>
             <Link to="/home">
-              <button style={buttonStyles} className="Button-hover">Get Started ></button>
+              <button style={styles.buttonPhone} className="Button-hover">Get Started ></button>
             </Link>
           </div>
         </div>

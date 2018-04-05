@@ -20,8 +20,12 @@ const Uploadphoto = ({ photo, file, showUserPhoto, addFile }) => {
       cursor: "pointer"
     },
     fileinput: {
-      borderRadius: "8px",
-      padding: "10px"
+      width: "0.1px",
+      height: "0.1px",
+      opacity: "0",
+      overflow: "hidden",
+      position: "absolute",
+      zIndex: "-1"
     },
     photo: {
       width: "400px",
@@ -34,67 +38,73 @@ const Uploadphoto = ({ photo, file, showUserPhoto, addFile }) => {
     titleLarge: {
       color: "rgb(100, 100, 100)"
     },
-    noBorder: { padding: "0px", margin: "0px" }
+    noBorder: { padding: "0px", margin: "0px" },
+    label: {
+      padding: "10px",
+      fontSize: "1.25em",
+      fontWeight: "700",
+      color: "black",
+      backgroundColor: "white",
+      display: "inline-block"
+    }
   };
 
   return (
     <div>
       <form>
         <div>
+          <MediaQuery query="(min-device-width: 1224px)">
+            <h3>Choose an image to upload (PNG, JPG)</h3>
+          </MediaQuery>
 
-     <MediaQuery query="(min-device-width: 1224px)">
-          <h3>Choose an image to upload (PNG, JPG)</h3>
-
-      </MediaQuery>
-
-      <MediaQuery query="(max-device-width: 1224px)">
-      <h3 style={styles.noBorder} >Choose an image to upload (PNG, JPG)</h3>
-
-      </MediaQuery>
-
-
-
+          <MediaQuery query="(max-device-width: 1224px)">
+            <h3 style={styles.noBorder}>
+              Choose an image to upload (PNG, JPG)
+            </h3>
+          </MediaQuery>
 
           <p style={styles.disclaimer}>
             Please DO NOT put anything offensive up here. You know what I'm
             talking about.
           </p>
-         
         </div>
 
-             <MediaQuery query="(min-device-width: 1224px)">
-             <div>
-             <input
-            style={styles.fileinput}
-            type="file"
-            id="image_uploads"
-            name="image_uploads"
-            accept=".jpg, .jpeg, .png"
-            multiple
-            onChange={onChange}
-          />
+        <MediaQuery query="(min-device-width: 1224px)">
+          <div>
+            <input
+              type="file"
+              id="image_uploads"
+              name="image_uploads"
+              accept=".jpg, .jpeg, .png"
+              multiple
+              onChange={onChange}
+            />
+          </div>
+          <img src={photo} style={styles.photo} alt="" />
+          {file.length > 0 ? <GetAI /> : ""}
+        </MediaQuery>
 
-             </div>
-        <img src={photo} style={styles.photo} alt="" />
-             {file.length > 0 ? <GetAI /> : ""}
-
-      </MediaQuery>
-
-      <MediaQuery query="(max-device-width: 1224px)">
-      {file.length > 0 ? <GetAI /> :  <input
-            style={styles.fileinput}
-            type="file"
-            id="image_uploads"
-            name="image_uploads"
-            accept=".jpg, .jpeg, .png"
-            multiple
-            onChange={onChange}
-          />}
-        <img src={photo} style={styles.photo} alt="" />
-
-      </MediaQuery>
-
-        
+        <MediaQuery query="(max-device-width: 1224px)">
+          {file.length > 0 ? (
+            <GetAI />
+          ) : (
+            <div>
+              <label for="image_uploads" style={styles.label}>
+                Choose a file
+              </label>
+              <input
+                style={styles.fileinput}
+                type="file"
+                id="image_uploads"
+                name="image_uploads"
+                accept=".jpg, .jpeg, .png"
+                multiple
+                onChange={onChange}
+              />
+            </div>
+          )}
+          <img src={photo} style={styles.photo} alt="" />
+        </MediaQuery>
       </form>
     </div>
   );
