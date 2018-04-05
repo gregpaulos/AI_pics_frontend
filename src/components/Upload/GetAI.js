@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { uploadPhoto, uploadANDsend } from "../../actions";
-import circle from "../../circles.svg";
 import { Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
 

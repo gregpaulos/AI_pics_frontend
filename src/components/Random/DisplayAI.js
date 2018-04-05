@@ -45,6 +45,8 @@ const DisplayAI = ({ watson, clarifai, google, photo_url }) => {
   const clarifailist = clarifai.map((el, i) => {
     if (i < 10) {
       return <li key={el}>{el}</li>;
+    } else {
+      return ""
     }
   });
 

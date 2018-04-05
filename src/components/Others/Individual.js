@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAll } from "../../actions";
-import circle from "../../circles.svg";
-import { Link } from "react-router-dom";
+const uuidv4 = require('uuid/v4');
+
 
 const Individual = ({ match, all, getAll }) => {
   const styles = {
@@ -30,30 +30,28 @@ const Individual = ({ match, all, getAll }) => {
   let individualPhoto = all[match.params.pageNumber - 1];
 
   let google = individualPhoto.apis.google;
-  //   ? individualPhoto.google : [];
   let watson = individualPhoto.apis.watson;
-  //   ? individualPhoto.watson : [];
   let clarifai = individualPhoto.apis.clarifai;
-  //   ? individualPhoto.clarifai : [];
   let photo_url = individualPhoto.url;
-  //   ? individualPhoto.url : "";
 
   const googlelist = google.map(el => {
-    return <li key={el}>{el}</li>;
+    return <li key={uuidv4()}>{el}</li>;
   });
 
   const googledisplay = <ul>{googlelist}</ul>;
 
   const clarifailist = clarifai.map((el, i) => {
     if (i < 10) {
-      return <li key={el}>{el}</li>;
+      return <li key={uuidv4()}>{el}</li>;
+    } else {
+      return ""
     }
   });
 
   const clarifaidisplay = <ul>{clarifailist}</ul>;
 
   const watsonlist = watson.map(el => {
-    return <li key={el}>{el}</li>;
+    return <li key={uuidv4()}>{el}</li>;
   });
 
   const watsondisplay = <ul>{watsonlist}</ul>;
@@ -62,17 +60,6 @@ const Individual = ({ match, all, getAll }) => {
     <div>
       <div>
       <img src={photo_url} style={styles.photo} alt="" />
-        {/* <div style={styles.flexin}>
-          <Link to={`/home/others/individual/${match.params.pageNumber - 1}`}>
-            {" "}
-            <h1> &#60; </h1>{" "}
-          </Link>
-          <img src={photo_url} style={styles.photo} alt="" />
-          <Link to={`/home/others/individual/${match.params.pageNumber + 1}`}>
-            {" "}
-            <h1> > </h1>{" "}
-          </Link>
-        </div> */}
       </div>
       <div>
         <div style={styles.flexin}>

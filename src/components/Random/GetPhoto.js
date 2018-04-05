@@ -41,7 +41,7 @@ const GetPhoto = ({ photo_url, getPhoto }) => {
             Get Random Photo
           </button>
         </MediaQuery>
-        <MediaQuery query="(max-device-width: 1224px)" />
+        <MediaQuery query="(max-device-width: 1224px)">
         <button
           style={styles.buttonPhone}
           className="buttons"
@@ -49,6 +49,7 @@ const GetPhoto = ({ photo_url, getPhoto }) => {
         >
           Get Random Photo
         </button>
+        </MediaQuery>
       </Link>
     </div>
   );

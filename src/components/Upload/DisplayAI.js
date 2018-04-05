@@ -5,14 +5,7 @@ import { getAI } from "../../actions";
 import circle from "../../circles.svg";
 
 const DisplayAI = ({ watson, clarifai, google, photo_url, getAI }) => {
-  const requestToGetAI = api => {
-    getAI(photo_url, api);
-  };
-
-  // if (photo_url && google.length < 1) requestToGetAI("google")
-  // if (photo_url && watson.length < 1) requestToGetAI("watson")
-  // if (photo_url && clarifai.length < 1) requestToGetAI("clarifai")
-
+ 
   const styles = {
     photo: {
       width: "300px",
@@ -64,6 +57,8 @@ const DisplayAI = ({ watson, clarifai, google, photo_url, getAI }) => {
   const clarifailist = clarifai.map((el, i) => {
     if (i < 10) {
       return <li key={el}>{el}</li>;
+    } else {
+      return ""
     }
   });
 

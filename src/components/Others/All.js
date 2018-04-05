@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import { getAll } from "../../actions";
 import circle from "../../circles.svg";
 import { Link } from "react-router-dom";
+const uuidv4 = require('uuid/v4');
 
 const All = ({ all, getAll }) => {
   const styles = {
@@ -59,7 +60,7 @@ const All = ({ all, getAll }) => {
       <div style={styles.flexin}>
         {all.map((photo, i) => (
           <Link to={`/home/others/individual/${i + 1}`}>
-            <div key={photo.url} style={styles.card} className="Hover-cards">
+            <div key={uuidv4()} style={styles.card} className="Hover-cards">
               <img style={styles.photo} src={photo.url} alt="" />
             </div>
           </Link>

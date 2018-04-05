@@ -89,7 +89,7 @@ const Uploadphoto = ({ photo, file, showUserPhoto, addFile }) => {
             <GetAI />
           ) : (
             <div>
-              <label for="image_uploads" style={styles.label}>
+              <label htmlFor="image_uploads" style={styles.label}>
                 Choose a file
               </label>
               <input
