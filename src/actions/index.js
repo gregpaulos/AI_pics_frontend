@@ -1,35 +1,10 @@
-import { sendAIrequest, sendRandomRequest, sendRequestForAll } from "./helpers";
+import {
+  sendAIrequest,
+  sendRandomRequest,
+  sendRequestForAll,
+  sendToAWS
+} from "./helpers";
 
-var startURL = "https://glacial-chamber-31453.herokuapp.com";
-// var startURL = "http://localhost:5000";
-
-export const GET_ALL = "GET_ALL";
-export function getAll() {
-  return async dispatch => {
-    const results = await sendRequestForAll();
-    dispatch({
-      type: GET_ALL,
-      payload: results
-    });
-  };
-}
-
-export const GET_PHOTO = "GET_PHOTO";
-export function getPhoto() {
-  return async dispatch => {
-    const json = await sendRandomRequest();
-    dispatch({
-      type: GET_PHOTO,
-      payload: json
-    });
-  };
-}
-
-export const SHOW_USER_PHOTO = "SHOW_USER_PHOTO";
-export const showUserPhoto = localURL => ({
-  type: SHOW_USER_PHOTO,
-  payload: localURL
-});
 
 export const ADD_FILE = "ADD_FILE";
 export const addFile = file => ({ type: ADD_FILE, payload: file });
@@ -43,53 +18,18 @@ export const clearAWS = () => ({ type: CLEAR_AWS });
 export const CLEAR_AI = "CLEAR_AI";
 export const clearAI = () => ({ type: CLEAR_AI });
 
-export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
-export function uploadPhoto(file) {
+
+export const GET_PHOTO = "GET_PHOTO";
+export function getPhoto() {
   return async dispatch => {
-    let url1 = startURL + "/v1/photos/clientupload";
-
-    let fileType = file.type;
-
-    var bodyToPost = {
-      fileType: fileType
-    };
-    let JSONbodyToPost = JSON.stringify(bodyToPost);
-
-    const AWSurl = await fetch(url1, {
-      method: "post",
-      body: JSONbodyToPost,
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-
-        const options = {
-          method: "PUT",
-          body: file
-        };
-        return fetch(data.signedRequest, options).then(response => {
-          if (!response.ok) {
-            throw new Error(`${response.status}: ${response.statusText}`);
-          }
-          return data.url;
-        });
-      })
-      .then(url => {
-        console.log("ITS DONE WITH ", url);
-        return url;
-      })
-      .catch(error => {
-        console.log(error);
-        return error;
-      });
-
+    const json = await sendRandomRequest();
     dispatch({
-      type: UPLOAD_PHOTO,
-      payload: AWSurl
+      type: GET_PHOTO,
+      payload: json
     });
   };
 }
+
 
 export const GET_AI = "GET_AI";
 export function getAI(photo_url, api) {
@@ -107,75 +47,56 @@ export function getAI(photo_url, api) {
   };
 }
 
-// TRYING TO DO SEQUENTIAL ACTIONS
+export const SHOW_USER_PHOTO = "SHOW_USER_PHOTO";
+export const showUserPhoto = localURL => ({
+  type: SHOW_USER_PHOTO,
+  payload: localURL
+});
 
-export const UPLOAD_SEND = "UPLOAD_SEND";
+export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
+export function uploadPhoto(file) {
+  return async dispatch => {
+    const AWSurl = await sendToAWS();
+    dispatch({
+      type: UPLOAD_PHOTO,
+      payload: AWSurl
+    });
+  };
+}
+
+
+// export const UPLOAD_SEND = "UPLOAD_SEND";
 export function uploadANDsend(file) {
   return async dispatch => {
-    const AWS = await uploadPhoto2(file);
-    console.log("GOT HERE", AWS);
+    const AWSurl = await sendToAWS(file);
 
     dispatch({
       type: UPLOAD_PHOTO,
-      payload: AWS
+      payload: AWSurl
     });
 
     let apis = ["watson", "google", "clarifai"];
     apis.forEach(api => {
       console.log("inside for each");
-
-      getAI(AWS, api);
-      // .then(json => {
-      //   dispatch({
-      //     type: GET_AI,
-      //     api: api,
-      //     payload: json
-      // });
-      // });
-      dispatch({ type: "fart" });
+      sendAIrequest(AWSurl, api).then(json => {
+        dispatch({
+          type: GET_AI,
+          api: api,
+          payload: json
+        });
+      });
     });
   };
 }
 
-async function uploadPhoto2(file) {
-  console.log("step 1");
-  let url1 = startURL + "/v1/photos/clientupload";
 
-  let fileType = file.type;
-
-  var bodyToPost = {
-    fileType: fileType
-  };
-  let JSONbodyToPost = JSON.stringify(bodyToPost);
-
-  const AWSurl = await fetch(url1, {
-    method: "post",
-    body: JSONbodyToPost,
-    headers: { "Content-Type": "application/json" }
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-
-      const options = {
-        method: "PUT",
-        body: file
-      };
-      return fetch(data.signedRequest, options).then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        }
-        return data.url;
-      });
-    })
-    .then(url => {
-      console.log("ITS DONE WITH ", url);
-      return url;
-    })
-    .catch(error => {
-      console.log(error);
-      return error;
+export const GET_ALL = "GET_ALL";
+export function getAll() {
+  return async dispatch => {
+    const results = await sendRequestForAll();
+    dispatch({
+      type: GET_ALL,
+      payload: results
     });
-
-  return AWSurl;
+  };
 }

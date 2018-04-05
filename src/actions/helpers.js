@@ -25,10 +25,50 @@ export async function sendRandomRequest() {
 }
 
 export async function sendRequestForAll() {
-    const response = await fetch(startURL + "/v1/photos/");
-    const json = await response.json();
-    const results = json.results;
-        return results;
-  }
-  
+  const response = await fetch(startURL + "/v1/photos/");
+  const json = await response.json();
+  const results = await json.results;
+  return results;
+}
 
+export async function sendToAWS(file) {
+  let url1 = startURL + "/v1/photos/clientupload";
+
+  let fileType = file.type;
+
+  var bodyToPost = {
+    fileType: fileType
+  };
+  let JSONbodyToPost = JSON.stringify(bodyToPost);
+
+  const AWSurl = await fetch(url1, {
+    method: "post",
+    body: JSONbodyToPost,
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      const options = {
+        method: "PUT",
+        body: file
+      };
+      return fetch(data.signedRequest, options).then(response => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+        return data.url;
+      });
+    })
+    .then(url => {
+      console.log("ITS DONE WITH ", url);
+      return url;
+    })
+    .catch(error => {
+      console.log(error);
+      return error;
+    });
+
+    return AWSurl;
+}
