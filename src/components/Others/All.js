@@ -26,6 +26,7 @@ const All = ({ all, getAll }) => {
     flexin: {
       display: "flex",
       alignItems: "center",
+      justifyContent: "center",
       flexWrap: "wrap",
     },
     card: {
