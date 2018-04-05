@@ -6,7 +6,7 @@ var startURL = "https://glacial-chamber-31453.herokuapp.com";
 export const GET_ALL = "GET_ALL";
 export function getAll() {
   return async dispatch => {
-    const results = await sendRandomRequest();
+    const results = await sendRequestForAll();
     dispatch({
       type: GET_ALL,
       payload: results
