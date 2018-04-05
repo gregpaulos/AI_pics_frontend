@@ -1,12 +1,12 @@
+import { sendAIrequest, sendRandomRequest, sendRequestForAll } from "./helpers";
+
 var startURL = "https://glacial-chamber-31453.herokuapp.com";
 // var startURL = "http://localhost:5000";
 
 export const GET_ALL = "GET_ALL";
 export function getAll() {
   return async dispatch => {
-    const response = await fetch(startURL + "/v1/photos/");
-    const json = await response.json();
-    const results = json.results;
+    const results = await sendRandomRequest();
     dispatch({
       type: GET_ALL,
       payload: results
@@ -17,8 +17,7 @@ export function getAll() {
 export const GET_PHOTO = "GET_PHOTO";
 export function getPhoto() {
   return async dispatch => {
-    const response = await fetch(startURL + "/v1/photos/random");
-    const json = await response.json();
+    const json = await sendRandomRequest();
     dispatch({
       type: GET_PHOTO,
       payload: json
@@ -94,19 +93,12 @@ export function uploadPhoto(file) {
 
 export const GET_AI = "GET_AI";
 export function getAI(photo_url, api) {
-  var bodyToPost = {
-    photo: photo_url
-  };
-  let JSONbodyToPost = JSON.stringify(bodyToPost);
-  let url = startURL + "/v1/ai/" + api;
+  console.log("got to get AI");
 
   return async dispatch => {
-    const response = await fetch(url, {
-      method: "post",
-      body: JSONbodyToPost,
-      headers: { "Content-Type": "application/json" }
-    });
-    const json = await response.json();
+    console.log("got to the inner funct");
+
+    const json = await sendAIrequest(photo_url, api);
     dispatch({
       type: GET_AI,
       api: api,
@@ -130,32 +122,19 @@ export function uploadANDsend(file) {
 
     let apis = ["watson", "google", "clarifai"];
     apis.forEach(api => {
-      getAI2(AWS, api).then(json => {
-        dispatch({
-          type: GET_AI,
-          api: api,
-          payload: json
-        });
-      });
+      console.log("inside for each");
+
+      getAI(AWS, api);
+      // .then(json => {
+      //   dispatch({
+      //     type: GET_AI,
+      //     api: api,
+      //     payload: json
+      // });
+      // });
+      dispatch({ type: "fart" });
     });
   };
-}
-
-async function getAI2(photo_url, api) {
-  console.log("Inside GETAI2", photo_url, api);
-  var bodyToPost = {
-    photo: photo_url
-  };
-  let JSONbodyToPost = JSON.stringify(bodyToPost);
-  let url = startURL + "/v1/ai/" + api;
-
-  const response = await fetch(url, {
-    method: "post",
-    body: JSONbodyToPost,
-    headers: { "Content-Type": "application/json" }
-  });
-  const json = await response.json();
-  return json;
 }
 
 async function uploadPhoto2(file) {
