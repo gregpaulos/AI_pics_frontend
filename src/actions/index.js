@@ -65,7 +65,6 @@ export function uploadPhoto(file) {
 }
 
 
-// export const UPLOAD_SEND = "UPLOAD_SEND";
 export function uploadANDsend(file) {
   return async dispatch => {
     const AWSurl = await sendToAWS(file);
