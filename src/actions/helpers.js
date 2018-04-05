@@ -31,6 +31,7 @@ export async function sendRequestForAll() {
   return results;
 }
 
+
 export async function sendToAWS(file) {
   let url1 = startURL + "/v1/photos/clientupload";
 
