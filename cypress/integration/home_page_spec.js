@@ -23,7 +23,6 @@ describe("Home", () => {
     cy
       .get('[href="/home/others/all"] > .Hover-darken > p')
       .should("contain", "See What Other People Have Done");
-    cy.get("button").click();
-    cy.url().should("includes", "http://localhost:3000/home/random/step2");
+    cy.get("button")
   });
 });

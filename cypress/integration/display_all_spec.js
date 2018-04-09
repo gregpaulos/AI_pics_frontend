@@ -18,7 +18,6 @@ describe("Other Peoples/All Route", () => {
       cy.get('[href="/home/others/all"] > .Hover-darken > h1')
       cy.get('[href="/home/others/all"] > .Hover-darken > p').should('contain', 'See What Other People Have Done' )
       cy.get(':nth-child(1) > :nth-child(1) > img')
-      // .should("have.attr", "src", /https:\/\/images.unsplash.com\/photo/);
       cy.get('[style="display: flex; flex-wrap: wrap; justify-content: center;"] > :nth-child(1)')
       .should('contain', 'Google' )
       cy.get('[style="display: flex; flex-wrap: wrap; justify-content: center;"] > :nth-child(2)')
