@@ -12,3 +12,28 @@ http://tryai.s3-website-us-east-1.amazonaws.com/
 For the backend code, visit this repo:
 https://github.com/gregpaulos/AI_pics_backend
 
+## Author
+### Greg Paulos
+* gregorypaulos@gmail.com
+* https://www.linkedin.com/in/gregorypaulos/
+
+## Installing
+First clone the repo
+
+```
+Git clone 
+```
+
+Install the dependencies:
+```
+yarn install
+```
+
+Fire up the app:
+```
+yarn start
+```
+
+## License
+This project is licensed under the MIT License.
+
