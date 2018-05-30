@@ -2,7 +2,7 @@
 Let's Test Our Robot Overlords! They may rule the world soon, but let's see how good they are at recognizing what's in a picture right now. This web application allows users to test and compare the computer vision capabilities of three popular vision APIs: Google Vision, IBM Watson, and Clarifai. 
 
 ## Built With
-Built with React, Reux, Node, and Express. Hosted on AWS and Heroku.
+Built with React, Redux, Node, and Express. Hosted on AWS and Heroku.
 
 ## Deployed
 A live version is deployed here:
